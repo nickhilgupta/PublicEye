@@ -1,0 +1,286 @@
+/* Variables: */
+:root{
+  --tangerine: #F08700;
+  --midnight_green: #004E64;
+  --cerulean: #00A5CF;
+  --sea_green: #00A6A6;
+  --ghost_white: #EDEDF4;
+  --eerie_black: #18181F;
+  --granite_gray: #5F5F66;
+}
+
+body {
+    background-color: var(--ghost_white);
+    color: var(--eerie_black);
+    font-family: "Montserrat", Monaco, monospace;
+    font-size: 18px;
+}
+
+footer {
+  background-color: var(--eerie_black);
+  color: var(--ghost_white);
+  font-size: 12px;
+  text-align: center;
+  padding: 1rem;
+  clear: both;
+}
+
+footer a {
+  color: var(--ghost_white);
+}
+
+footer a:hover {
+  color: var(--cerulean);
+}
+
+.steps {
+    margin: 12px;
+}
+
+.code {
+    margin: 12px;
+    line-height: 25px;
+}
+
+/*---------------------
+/
+/   Nav Bar Styling
+/
+/----------------------*/
+
+.nav_bar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: var(--ghost_white);
+    overflow-x: auto;
+    max-height: 75px;
+    white-space: nowrap;
+}
+
+.nav_item {
+    white-space: nowrap;
+    float: right;
+    display: block;
+    color: var(--eerie_black);
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-decoration: none;
+}
+
+#nav_home {
+  float: left;
+}
+
+#nav_home a:hover {
+  color: var(--cerulean);
+  transition: color 0.2s;
+}
+
+.nav_a {
+    display: block;
+    color: var(--eerie_black);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+a {
+    color: var(--eerie_black);
+}
+
+a:hover {
+    color: var(--tangerine);
+    transition: color 0.2s;
+}
+
+#git_button {
+  background-color: var(--cerulean);
+}
+
+#git_button a {
+  color: var(--ghost_white);
+}
+
+#git_button:hover {
+  background-color: var(--midnight_green);
+  transition: background-color 0.2s;
+}
+
+.active {
+  color: var(--tangerine);
+}
+
+  .header_icon {
+    height: 400px;
+    width: auto;
+    float: left;
+    margin: 3rem 5rem;
+  }
+
+  .container {
+    padding: 2rem;
+  }
+
+/*---------------------
+/
+/   Home Page Styling
+/
+/----------------------*/
+
+#cont-homeheader {
+  padding-top: 8rem;
+  font-size: 36px;
+  text-align: center;
+}
+
+#cont-background {
+  clear: both;
+  background-color: var(--sea_green);
+  padding: 3rem 2rem;
+}
+
+#cont-background p {
+  text-indent: 50px;
+}
+
+#cont-artsig {
+  clear: both;
+  padding: 2rem;
+}
+
+#cont-artsig h1 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+#cont-artsig h4 {
+  text-align: center;
+  margin-top: 0;
+}
+
+.cards {
+  display: flex;
+  justify-content: space-around;
+}
+
+.card {
+  flex-basis: 330px;
+  text-align: center;
+}
+
+.card p {
+  text-align: justify;
+}
+
+#cont-projflow {
+}
+
+/*---------------------
+/
+/   Software Page Styling
+/
+/----------------------*/
+
+#cont-codeheader {
+  padding-top: 8rem;
+  font-size: 36px;
+  text-align: center;
+}
+
+#cont-breakdown {
+  clear: both;
+}
+
+#cont-currentcode {
+  clear: both;
+}
+
+/*---------------------
+/
+/   How to Start Page Styling
+/
+/----------------------*/
+
+#cont-starthere {
+  padding-top: 8rem;
+  text-align: center;
+  font-size: 36px;
+}
+
+#cont-currentprogress {
+  clear: both;
+  background-color: var(--sea_green);
+  color: var(--eerie_black);
+  padding: 4rem 2rem;
+}
+
+/*---------------------
+/
+/   Hardware Page Styling
+/
+/----------------------*/
+
+#cont-hardwareheader {
+  padding-top: 8rem;
+  text-align: center;
+  font-size: 36px;
+}
+
+#cont-hardware {
+  clear: both;
+}
+
+/*---------------------
+/
+/   Future Plans Page Styling
+/
+/----------------------*/
+
+#cont-futureheader {
+  padding-top: 8rem;
+  text-align: center;
+  font-size: 36px;padding-top: 8rem;
+}
+
+#cont-future {
+  clear: both;
+}
+
+/*---------------------
+/
+/   Gallery Page Styling
+/
+/----------------------*/
+
+#cont-galleryheader {
+  padding-top: 8rem;
+  text-align: center;
+  font-size: 36px;
+}
+
+#cont-gallery {
+  float: left;
+}
+
+div.gallery {
+    margin: 5px;
+    border: 3px solid #ccc;
+    float: left;
+    width: 180px;
+  }
+
+div.gallery:hover {
+  border: 1px solid #777;
+}
+
+div.gallery img {
+  width: 100%;
+  height: auto;
+}
+
+div.desc {
+  padding: 15px;
+  text-align: center;
+}

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="Style.css">
+    <title>Code</title>
+</head>
+
+<body>
+    <header>
+        <ul class="nav_bar">
+            <li class="nav_item" id="nav_home"><a class="nav_a" href="./index.html">In the Public Eye</a></li>
+            <li class="nav_item" id="git_button"><a target="blank" class="nav_a"
+                    href="https://github.umn.edu/willow/Public-Eye" type="button">GitHub</a></li>
+            <li class="nav_item"><a class="nav_a" href="./Gallery.html">Gallery</a></li>
+            <li class="nav_item"><a class="nav_a" href="./Acknowledgements.html">Acknowledgements</a></li>
+            <li class="nav_item"><a class="nav_a" href="./Future Plans.html">Future Plans</a></li>
+            <li class="nav_item"><a class="nav_a" href="./Hardware.html">Hardware</a></li>
+            <li class="nav_item"><a class="nav_a active" href="./Code.html">Software</a></li>
+            <li class="nav_item"><a class="nav_a" href="./How to Start.html">Where to Start</a></li>
+        </ul>
+    </header>
+
+    <div class="content">
+        <img src="./images/interface.png" class="header_icon"></img>
+        <div class="container" id="cont-codeheader">
+          <h1>Software</h1>
+        </div>
+
+        <div class="code container" id="cont-breakdown">
+            <h1>Breakdown</h1>
+            <p>
+                This page simply has a breakdwon of some of the code file names and what they all do. We understand that
+                it can be a little intimidating to delve into large pools of unfamiliar code, so we hope this helps you
+                get startd. We recommend sticking to the current
+                code which uses a neural network, however, if you decide that the obsolete code could be refined to be
+                more stable, that is an option as well. The obsolete code involves using the Haar cascade.
+            </p>
+        </div>
+
+        <div class='code container' id="cont-currentcode">
+            <h1>Current Code</h1>
+            <h2><a href="https://github.umn.edu/willow/Public-Eye/blob/gh-pages/record.py">record.py</a></h2>
+            <p>
+                POSSIBLY THE MOST IMPORTANT FILE
+                <p>
+                    The existing header comments on this file are extremely helpful. However, here’s a walkthrough and
+                    some additional notes from this file.
+                    Keep in mind that this code was not written by us, so we can only provide a theoretical description
+                    of the code flow. Assuming the libraries used are intact, this description should be accurate
+                </p>
+            </p>
+            <ul>
+                <li>This code starts by first loading up some sounds. These sounds are saved in the “sounds” folder as
+                    .wav files </li>
+                <li>It starts by setting up connections to the camera (from the xiapi library) and the proximity sensor
+                    (which, based on past reports, didn’t fully function and might need more work)</li>
+                <li>Note that this does use multithreading and thus, you will see “threading.Lock()” used, in order to
+                    avoid a race condition. If you’re unsure what this is, try looking up race conditions and mutex
+                    locks in multithreading </li>
+                <p></p>
+                <li>Before we get into the meat of the code, it is important to provide a good description of the
+                    measure() function. This function </li>
+                <ul>
+                    <li>Reads from the proximity sensor for a short duration </li>
+                    <li>Throws out a couple of dummy readings </li>
+                    <li>Takes the third value and decodes it</li>
+                    <li>Sends back decoded values </li>
+                </ul>
+                <p></p>
+                <li>Now let’s look at the main part of this code</li>
+                <ul>
+                    <li>We start by playing a sound indicating that we are waiting to start recording.</li>
+                    <li>It will then wait for the sensor to detect a person. Note line 257 of the code for this. As soon
+                        as it detects a person, the recording starts, and a new sound is played. The recording lasts for
+                        15 seconds </li>
+                    <li>After recording, the end sound is played </li>
+                    <li>Now, each thread heads on to process the recorded frames. The work is split evenly amongst them.
+                        This is where multithreading is important to ensure quick processing </li>
+                    <li>These threads (in the ProcessFrame function) use the tensorflow model to ensure that the
+                        measured data is indeed an eye. Note that the option for using the old cascade classifier still
+                        exists
+                        and changing the initialization macro at the beginning of the code can let you switch between
+                        the classifiers </li>
+                    <li>These frames are then downsampled and added to a buffer </li>
+                    <li>Once the data is stored in the buffer and we have ensured that the data is indeed an eye (line
+                        286), another sound is played. The new video file is complied and outputted </li>
+                    <li>If the video was not an eye, it is instantly rejected </li>
+                </ul>
+            </ul>
+
+            <h2><a href="https://github.umn.edu/willow/Public-Eye/tree/gh-pages/src/PublicEye">src/PublicEye Folder</a>
+            </h2>
+            <p>
+                To run, open the file within processing and press the “Run” button. Ensure that a video archive and
+                visitor archive folders exist in a folder called “data/archive” and “data/visitor_movies” folder,
+                respectively, and that the archive has at least 6 video clips.
+                Uses four subfiles: DrawMovie.pde, Log.java, MovieManager.java, VisitorClip.java:
+            </p>
+            <ul>
+                <li>The program begins by doing some setup and creating two watchdog threads</li>
+                <li>The screen size is 480x96 pixels. This is the native resolution of the six panels that are being
+                    used for display</li>
+                <li>One thread watches for new visitor clips (MovieManager.watchForNewVisitorClips())</li>
+                <li>One thread watches for expired visitor clips (MovieManager.watchForExpiredClips())</li>
+                <li>The program also checks that the video archive and visitor archive exists, in a “data/archive” and
+                    “data/visitor_movies” folder, respectively
+                    If any setup fails, the program exits</li>
+                <li>initializeMovieDisplay() sets up the video clips in the correct screen-locations and renders the
+                    first frame of the animation, drawMovie() takes it from there</li>
+                <li>drawMovie() is called every frame by the main thread. It creates a thread to load new movies when
+                    needed (to help prevent stuttering)</li>
+                <li>Log.java logs different information based on the log level (FATAL, ERROR, WARN, INFO, DEBUG)</li>
+                <li>MovieManager.java stores information about the archive and visitor clips. It also chooses a random
+                    archived (or visitor) clip when a new clip is needed
+                    This file contains two watchdog functions, watchForNewVisitorClips() and watchForExpiredClips() that
+                    are given their own threads to watch the video folders.
+                </li>
+                <li>VisitorClip.java has some utility functions for loading a new clip from a visitor</li>
+            </ul>
+
+            <h2><a href="https://github.umn.edu/willow/Public-Eye/blob/gh-pages/classify_image.py">classify_image.py</a>
+            </h2>
+            <p>
+                As the name implies, this file is used to determine if an image contains an eye or not. It appears to
+                mostly be taken directly from some TensorFlow library or another.
+            </p>
+            <ul>
+                <li>load_graph() takes in a model file as input, which seems to simply be a file containing a string. It
+                    opens the file and reads it using graph_def.ParseFromString. This seems to be setting up a graph
+                    object in tensorflow (imported as tf),
+                    which will be used to operate on the image in classify_img()</li>
+                <li>read_tensor_from_image_file() is creating a tensor object of the supplied image. It does some
+                    resizing of the image, and then executes the functions listed by the graph contained by tf on the
+                    image</li>
+                <li>load_labels() simply reads all of the possible image labels listed in the target file and stores
+                    them in a label array</li>
+                <li>classify_img() starts by creating a lot of objects, such as the name of the image file, the trained
+                    model to be used, the labels needed, and parameters of the image. It then calls load_graph() on the
+                    trained model’s file,
+                    read_tensor_from_image_file() on the image, and executes the graph input and output operations on
+                    what looks like a file path</li>
+                <li>It then executes the image classification using tf.Session.run, and returns the label it gave the
+                    image (either eye or not eye)</li>
+            </ul>
+
+            <h2><a href="https://github.umn.edu/willow/Public-Eye/tree/gh-pages/tf_files">tf_files folder</a></h2>
+            <p>
+                This contains the files for a tensorflow model. The important thing to note here is that this contains:
+            </p>
+            <ul>
+                <li>A pre-trained model off the internet </li>
+                <li>A re-trained model that simply does binary classification (eye vs not eye) </li>
+            </ul>
+            <p>
+                Use:
+            </p>
+            <p>
+                Note: this folder is referenced in the file classify_image.py
+            </p>
+            <p>
+                Classify_image.py has been imported by record.py
+            </p>
+            <p>
+                Essentially, here’s the flow of code
+            </p>
+            <ul>
+                <li>Record.py:</li>
+                <ul>
+                    <li>Get images and ask classify_image.py to see if it is an eye</li>
+                </ul>
+                <li>Classify_image.py</li>
+                <ul>
+                    <li>Take the passed down image and open the tensorflow retrained model from the tf_files folder</li>
+                    <li>Use this model to check if its an eye and return results to record.py </li>
+                </ul>
+        </div>
+        <div class='code'>
+            <h1>Obsolete Code</h1>
+
+            <h2><a href="https://github.umn.edu/willow/Public-Eye/tree/gh-pages/src/eyeDetection">src/eyeDetection
+                    Folder</a></h2>
+            <p>
+                This is very similar to EyeDetection.py in the root directory. This folder is also obsolete and only
+                kept for documentation purposes.
+                The two main files in this folder are haarcascade_eye2.xml and opencvtest.cpp.
+
+            </p>
+            <ul>
+                <li>Haarcascade_eye2.xml:</li>
+                <ul>
+                    <li>This file defines the descriptor that the haar cascade uses to detect the eye. This is a simple
+                        data file and there are several like it on the internet. EyeDetection.py in the root folder uses
+                        a different file</li>
+                </ul>
+                <li>Opencvtest.cpp:</li>
+                <ul>
+                    <li>Initialize by loading up the camera </li>
+                    <li>If an eye is detected, record for 15 seconds and save the video frame by frame </li>
+                    <li>As long as there are frames to process and recording is complete:</li>
+                    <ul>
+                        <li>Do some filtering - i.e. convert to grayscale image</li>
+                        <li>Use the cascade classifier to detect the eye in the frame </li>
+                        <li>Measure the radius of the eye</li>
+                        <li>Show each eye frame with a ring drawn around it and the center marked </li>
+                    </ul>
+                </ul>
+            </ul>
+
+            <h2><a href="https://github.umn.edu/willow/Public-Eye/blob/gh-pages/EyeDetection.py">EyeDetection.py</a>
+            </h2>
+            <p>
+                This is an obsolete file that was no longer used and just left for documentation purposes.
+                Here’s a quick description of what it does:
+            </p>
+            <ul>
+                <li>Starts up the camera</li>
+                <li>Starts collection data (video frame by frame) </li>
+                <li>Sets up multithreading</li>
+                <li>Starts a 15-second timer and queues up video frames </li>
+                <li>Each video frame is processed by a thread that uses the Haar cascade classifier to detect the eye
+                </li>
+                <li>When keyboard interrupted (Ctrl+C), the code will end and tell you how man positive eye matches were
+                    found</li>
+                <li>If enough eye counts were detected, the video is saved</li>
+                <li>All threads are merged and the code is ended </li>
+            </ul>
+
+            <h2><a href="https://github.umn.edu/willow/Public-Eye/tree/gh-pages/src/arduino">src/arduino</a></h2>
+            <p>
+                This is an obsolete folder. All Arduino code is obsolete. The newest implementation has no use for an
+                Arduino.
+            </p>
+            <p>
+                It has code to play some audio for the automation as the original implementation used an Arduino with
+                the proximity sensor. This is really it. This can be ignored.
+            </p>
+
+            <h2><a href="https://github.umn.edu/willow/Public-Eye/tree/gh-pages/scripts">scripts folder</a></h2>
+            <p>
+                This folder contains a whole mess of files from different places. For example, retrain.py and
+                show_image.py are from a codelabs repository called “TensorFlow for poets 2”, along with multiple other
+                files in this folder. Meanwhile, openCV_video.py is unlabeled and, assuming the name is correct,
+                intended for use with openCV and not tensorflow.
+                As far as I can tell, none of the files from the codelabs repository were edited in any way, meaning
+                they were probably used to get a better understanding of tensorflow at some point, and are not relevant
+                to the operation of the system. Another possibility is that this folder was used in the retraining of
+                the neural network, as I have not seen another file such as retrain.py
+                anywhere, but I can not find any documentation on the real reason behind having this folder here.
+                Another note is that the code in label_image.py is very similar to the ./classify_image.py file. The
+                only other thing in the folder is the __pycache__ folder, which contains three .pyc files from compiling
+                the .py files in the scripts folder.
+            </p>
+
+            <h2><a href="https://github.umn.edu/willow/Public-Eye/blob/gh-pages/sonar.ino">sonar.ino</a></h2>
+            <p>
+                This is a file for when the rangefinder was controlled via arduino, according to the comments in it. The
+                code is commented somewhat, but basically this file is just the loop reading from the rangefinder, which
+                is now done in record.py
+            </p>
+
+            <h2><a href="https://github.umn.edu/willow/Public-Eye/blob/gh-pages/usbfs.sh">usbfs.sh</a></h2>
+            <p>
+                It's a one line script with no apparent use. I think its supposed to try to execute the sudo command,
+                and echo 0 if it fails, but I am not familiar with scripting. The tee command takes standard input and
+                outputs it to stdout and a file, so it could be pasting the 0 from the echo command into a file.
+                The comment on it says “added command to prevent memcpy error when initializing xIQ camera”, so it might
+                be just be called by another file.
+            </p>
+        </div>
+
+        <footer>
+          <div>This project is made possible by the <a href="https://ece.umn.edu/">University of Minnesota - Department of Electrical and Computer Engineering</a></div>
+          Icons made by <a href="https://www.flaticon.com/authors/pixelmeetup" title="Pixelmeetup" style="color: rgb(80, 80, 250)">Pixelmeetup<Pixelmeetup></a> from <a href="https://www.flaticon.com/" title="Flaticon" style="color: rgb(80, 80, 250)"> www.flaticon.com</a>
+        </footer>
+
+</body>
+
+</html>

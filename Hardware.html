@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="Style.css">
+    <title>Hardware</title>
+</head>
+
+<body>
+  <header>
+    <ul class="nav_bar">
+        <li class="nav_item" id="nav_home"><a class="nav_a" href="./index.html">In the Public Eye</a></li>
+        <li class="nav_item" id="git_button"><a target="blank" class="nav_a" href="https://github.umn.edu/willow/Public-Eye" type="button">GitHub</a></li>
+        <li class="nav_item"><a class="nav_a" href="./Gallery.html">Gallery</a></li>
+        <li class="nav_item"><a class="nav_a" href="./Acknowledgements.html">Acknowledgements</a></li>
+        <li class="nav_item"><a class="nav_a" href="./Future Plans.html">Future Plans</a></li>
+        <li class="nav_item"><a class="nav_a active" href="./Hardware.html">Hardware</a></li>
+        <li class="nav_item"><a class="nav_a" href="./Code.html">Software</a></li>
+        <li class="nav_item"><a class="nav_a" href="./How to Start.html">Where to Start</a></li>
+    </ul>
+  </header>
+
+    <div class="content">
+      <img src="./images/motherboard.png" class="header_icon"></img>
+      <div class="container" id="cont-hardwareheader">
+        <h1>Hardware</h1>
+      </div>
+      <div class="container" id="cont-hardware">
+        As mentioned before, a great deal of hardware has already been purchased for this project. This should be
+        sufficient to get the project up and running. Here is a short list of the hardware devices at hand:
+
+        <ul>
+          <li>Ultrasonic Sensor</li>
+          <ul>
+              <li>USB-ProxSonar-EZT M Series</li>
+              <li>This sensor is used for checking to find out whether somone has approached the prototype and is
+                  waiting for their eye to be scanned</li>
+          </ul>
+          <li>xiQ Industrial Camera</li>
+          <ul>
+              <li>Donated to the project not from the budget. This is a very high quality camera and can record 1440p
+                  video at 90FPS.</li>
+          </ul>
+          <li>Custom Computer</li>
+          <ul>
+              <li>This computer was intentionally built to be quite powerful. It was used to train the neural network
+                  to
+                  classify images as eye or not-eye. It also holds a copy of all the code and is one of the most
+                  important
+                  parts of this project. Here are the computer specification: </li>
+              <ul>
+                  <li>CPU: i3-8100 Quad Core</li>
+                  <li>GPU: GTX 1050</li>
+                  <li>Memory: 16GB RAM</li>
+                  <li>Storage 1: 156GB m.2 SSD</li>
+                  <li>Storage 2: 2TB HDD</li>
+              </ul>
+          </ul>
+          <li>Mobile UDOO</li>
+          <ul>
+              <li>This is a small portable and low-powered computer</li>
+              <li>It is used to keep a virtual library of the recordings</li>
+              <li>The goal is to have the UDOO connect up to the main prototype and have everything run off it</li>
+          </ul>
+          <li>Flexible LED Strip + Relay</li>
+          <ul>
+              <li>This is the light strip the inside of the camera housing</li>
+              <li>Relay controls power to the LED such that it’s only on when recording</li>
+              <li>This might need to be configured so that the brightness of the LEDs can be reduced</li>
+          </ul>
+      </ul>
+      </div>
+    </div>
+
+    <footer>
+      <div>This project is made possible by the <a href="https://ece.umn.edu/">University of Minnesota - Department of Electrical and Computer Engineering</a></div>
+      Icons made by <a href="https://www.flaticon.com/authors/pixelmeetup" title="Pixelmeetup" style="color: rgb(80, 80, 250)">Pixelmeetup<Pixelmeetup></a> from <a href="https://www.flaticon.com/" title="Flaticon" style="color: rgb(80, 80, 250)"> www.flaticon.com</a>
+    </footer>
+
+</body>
+
+</html>

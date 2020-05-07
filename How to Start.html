@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="Style.css">
+  <title>How to Start</title>
+</head>
+
+<body>
+  <header>
+    <ul class="nav_bar">
+      <li class="nav_item" id="nav_home"><a class="nav_a" href="./index.html">In the Public Eye</a></li>
+      <li class="nav_item" id="git_button"><a target="blank" class="nav_a"
+          href="https://github.umn.edu/willow/Public-Eye" type="button">GitHub</a></li>
+      <li class="nav_item"><a class="nav_a" href="./Gallery.html">Gallery</a></li>
+      <li class="nav_item"><a class="nav_a" href="./Acknowledgements.html">Acknowledgements</a></li>
+      <li class="nav_item"><a class="nav_a" href="./Future Plans.html">Future Plans</a></li>
+      <li class="nav_item"><a class="nav_a" href="./Hardware.html">Hardware</a></li>
+      <li class="nav_item"><a class="nav_a" href="./Code.html">Software</a></li>
+      <li class="nav_item"><a class="nav_a active" href="./How to Start.html">Where to Start</a></li>
+    </ul>
+  </header>
+
+  <div class="content">
+    <img src="./images/management.png" class="header_icon"></img>
+    <div class="container" id="cont-starthere">
+      <h1>Start Here.</h1>
+    </div>
+
+    <div class="container" id="cont-currentprogress">
+      <h1>Current Progress</h1>
+      <div class="how_to_start">
+      <p>
+        Before jumping into the how-to-start, it is important to have a good grasp of the current progress.
+      </p>
+      <p>
+          So far, a hardware prototype has been built and improved upon by past groups. This prototype has the camera
+        and the proximity sensor already installed on it. The 3D printed attachment at the front of the prototype
+        that a user might look inside has an LED strip installed on the walls to properly illuminate the eye. While
+        it is fairly robust, this prototype, still lacks a few important things- a speaker/buzzer for audio
+        feedback, weatherproofing, and mounts for the proximity sensor and the relay for the light. Furthermore, the
+        the LED strip, when turned on, has some issues with glare which can be fairly significant for people with
+        glasses. While these issues are quite small and wont affect operations too much, fixing them can really help
+        improve the seamless automation envisioned by Professor Willow. Overall, significant progress has already
+        been made on the hardware prototype and this device is very close to completion.
+      </p>
+      <p>
+          A majority of the software code for the project has also already been written. Due to the COVID outbreak,
+        we, the Class of 2020 group were not able to test any of this old code. However, we have gone through all
+        the files that Prof. Willow has kept track of in the Github repository and documented their theoretical use
+        on this website. Finally, we have also marked which files are obsolete and can be safely ignored, along with
+        their original intended use. Please note that none of these files have been delted for documentation
+        purposes. This quick start guide should now correctly navigate you through the beginning steps of this
+        project.
+      </p>
+      </div>
+    </div>
+
+    <div class="container" id="cont-startguide">
+      <h1>Quick Start Guide:</h1>
+      <ol class="how_to_start">
+        <li class="steps">Read through the background throughly and understand what the goal is. Look through
+          <a target="blank"
+            href="https://drive.google.com/file/d/19BVUYDYcuVk896DNcZeEx2tOHiIC6rYt/view?usp=sharing">this</a>
+          presentation to understand the project a little better. Make sure that you have also read through the
+          project overview described on the home page and through the current progress written above. It is vital
+          to understand these in order to succeed at this project
+        </li>
+        <li class="steps">Request Google Drive and Github access from professor Willow. Both of these have several
+          documents that you might need to constantly refer to</li>
+        <li class="steps">Look through the posters from <a target="blank"
+            href="https://drive.google.com/file/d/1HTdp0oArvr4Nz7EC0oHKgoO3LOZeIPen/view?usp=sharing">2018</a>
+          and
+          <a target="blank"
+            href="https://drive.google.com/file/d/1Sm31Vxicg2NAN9-H9kJY0KjCRr2UUZya/view?usp=sharing">2019</a>
+          to try and get a big picture idea of what these groups have done. Here are a couple of key points from
+          these two years:
+          <ul>
+            <li class="steps">The group in 2018 used a Haar Cascade classifier for Eye Detection</li>
+            <li class="steps">The group in 2019 used a Neural Network for Eye Detection</li>
+            <li class="steps">The group from 2019 completely scrapped the ideas from 2018 for a more robust and
+              modern implementaion
+            </li>
+            <li class="steps">We, the group of 2020 recommend sticking with the Neural Network implementation
+            </li>
+          </ul>
+        </li>
+        <li class="steps">Now would be a great time to look at the code documentation. For your convenience, we have
+          broken this up into two sections - the obsolete code from 2018 and the current code from 2019
+          <ul>
+            <li>Note: If the code documentation gets a little overwhelming, try ignoring any obsolete code and
+              just looking at the most recent files</li>
+          </ul>
+        </li>
+        <li class="steps">Log-on to the main computer (the big one) that sits with Prof. Willow. Familiarize yourself
+          with all the directory structures and locate all the files on the GitHub</li>
+        <li class="steps">Try and get just the camera operating. The software for this should be on the computer
+          already.</li>
+        <li class="steps">Try and run the code from here. This might be hard to do, however once you have
+          accomplished this, you should be ready to go on your own.</li>
+        <li class="steps">Finally, it might be a good idea to try an boot into the UDOO portable computer. The goal
+          is to have this be the brains of the operations by just running a pre-trained Neural Network model.</li>
+        <li class="steps">Good luck! Make us proud!</li>
+      </ol>
+    </div>
+
+  </div>
+
+  <footer>
+    <div>This project is made possible by the <a href="https://ece.umn.edu/">University of Minnesota - Department of Electrical and Computer Engineering</a></div>
+    Icons made by <a href="https://www.flaticon.com/authors/pixelmeetup" title="Pixelmeetup" style="color: rgb(80, 80, 250)">Pixelmeetup<Pixelmeetup></a> from <a href="https://www.flaticon.com/" title="Flaticon" style="color: rgb(80, 80, 250)"> www.flaticon.com</a>
+  </footer>
+
+</body>
+
+</html>
